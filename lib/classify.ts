@@ -198,7 +198,10 @@ export async function classify(
         method: 'POST',
         headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
         body: JSON.stringify(body),
-        signal: AbortSignal.timeout(30_000),
+        // The ambiguous calls are the slow ones — a borderline lead can take well over
+        // 30s. Kept under the route's maxDuration of 60s so the function returns a
+        // diagnosis rather than being killed mid-request.
+        signal: AbortSignal.timeout(num('GEMINI_TIMEOUT_MS', 45_000)),
       });
 
       if (res.status === 429) {

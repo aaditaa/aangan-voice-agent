@@ -246,11 +246,22 @@ Verified against the live deployment:
   T02 → `qualified` with `asked_pricing` true, T10 → `not_fit` on "4 volunteered budget"
   with the caller's figure held in its own field and no price in the handoff note.
 
-Not yet run, because it needs the remaining credentials:
+**Eval: 20/20 on the real September phone enquiries**, on `gemini-3.8-flash`. Every
+classification correct, including the four that decide on different criteria — T03 service
+area, T07 timeline, T10 a volunteered budget that is too low, T09 an existing client's
+complaint — and the two callers who pressed for a price (T02, T13), both of whom qualified,
+with the figure stripped by the filter. The Cut held on all twenty: no price in the studio's
+voice in any output.
 
-- The full eval across all 20 transcripts (`npm run eval`) — the free tier allows about
-  20 requests a day.
-- Delivery through Resend, a HubSpot deal, and a Vaani call.
+Run `npm run eval` to reproduce; results are cached in `evals/.cache`.
+
+One real call has also been through the live webhook end to end: row written to Supabase,
+lead classified `qualified`, designer emailed, dashboard updated, cost recorded.
+
+Not yet exercised:
+
+- HubSpot deals — optional, skipped cleanly when `HUBSPOT_PRIVATE_APP_TOKEN` is empty.
+- A real Vaani phone call (needs a paid number or Vaani's test call).
 
 ---
 

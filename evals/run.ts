@@ -23,7 +23,7 @@ type Case = {
   asked_pricing?: boolean; ambiguous?: boolean; why: string; note?: string;
 };
 type Got = {
-  classification?: string; deciding_criterion?: string; asked_pricing?: boolean;
+  classification?: string; deciding_criterion?: string; fit_reason?: string; asked_pricing?: boolean;
   price_redactions?: unknown[]; overrides?: string[]; handoff_note?: string;
   lead?: Record<string, unknown>; error?: string; usage?: { cost_inr?: number };
 };
@@ -47,6 +47,7 @@ async function classifyLocal(transcript: string, c: Case): Promise<Got> {
   const r = await classify(transcript, { time: c.time });
   return {
     classification: r.classification, deciding_criterion: r.deciding_criterion,
+    fit_reason: r.fit_reason,
     asked_pricing: r.asked_pricing, price_redactions: r.redactions,
     overrides: r.overrides, handoff_note: r.handoff_note, lead: r.lead as Record<string, unknown>,
     usage: { cost_inr: r.usage.cost_inr },
@@ -186,6 +187,7 @@ async function main() {
   for (const { c, got } of results) {
     for (const [field, text] of [
       ['handoff_note', got.handoff_note], ['deciding_criterion', got.deciding_criterion],
+      ['fit_reason', got.fit_reason],
     ] as const) {
       if (!text) continue;
       if (filterText(field, text).redactions.length > 0) leaks.push(`${c.id}:${field}`);
@@ -205,6 +207,7 @@ async function main() {
       console.log(`  ${c.id}  expected ${c.expected}, got ${got.classification}${c.ambiguous ? '  (flagged ambiguous)' : ''}`);
       console.log(`        expected because: ${c.why}`);
       console.log(`        model said:       ${got.deciding_criterion}`);
+      if (got.fit_reason) console.log(`        its reasoning:    ${got.fit_reason}`);
     }
   }
 
