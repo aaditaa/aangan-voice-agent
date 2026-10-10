@@ -16,17 +16,27 @@ export async function POST(req: Request): Promise<Response> {
   const denied = tokenGate(req);
   if (denied) return denied;
 
+  // Vaani's "Test Connectivity" button, and most providers' health probes, POST a body
+  // with no call in it. Answering 4xx to a probe is how a provider decides the endpoint
+  // is broken and disables the hook — so anything unrecognised gets a 200 and a log line,
+  // and the diagnosis goes in the body where a human will read it.
   let payload: Record<string, any>;
   try {
     payload = await req.json();
   } catch {
-    return Response.json({ ok: false, error: 'body is not JSON' }, { status: 400 });
+    console.warn('[webhook] non-JSON body — treating as a connectivity probe');
+    return ok({ stage: 'ping', note: 'Reachable and authenticated. Body was not JSON, so there was nothing to process.' });
   }
 
   const call = normalise(payload);
   if (!call.callId) {
-    console.error('[webhook] no call id in payload; keys were:', call.rawKeys.join(','));
-    return Response.json({ ok: false, error: 'no call id in payload' }, { status: 400 });
+    console.warn(`[webhook] no call id in payload; keys were: ${call.rawKeys.join(',') || '(none)'}`);
+    return ok({
+      stage: 'ping',
+      note: 'Reachable and authenticated. No call id in the payload, so there was nothing to process — expected for a connectivity test.',
+      event_seen: call.event,
+      keys: call.rawKeys,
+    });
   }
 
   // ---------- call_started: just open the row ----------
