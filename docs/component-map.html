@@ -1,164 +1,430 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aangan Call Agent — Component Map</title>
+<title>Aangan Call Agent</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-  :root{
-    --bg:#f5f3f0; --card:#fff; --ink:#1c1917; --muted:#78716c; --line:#dcd8d4;
-    --cut:#b91c1c; --good:#15803d; --warn:#b45309; --accent:#1c1917;
-  }
-  @media (prefers-color-scheme:dark){ :root:not([data-theme=light]){
-    --bg:#1c1917; --card:#262321; --ink:#f5f3f0; --muted:#a8a29e; --line:#3f3b38;
-    --cut:#f87171; --good:#4ade80; --warn:#fbbf24; --accent:#f5f3f0;
-  }}
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);
-    font:16px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,sans-serif;
-    -webkit-font-smoothing:antialiased}
-  .wrap{max-width:900px;margin:0 auto;padding:44px 16px 72px}
-  .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
-  h1{font-size:30px;letter-spacing:-.02em;margin:6px 0 8px}
-  .lede{color:var(--muted);margin:0 0 34px;max-width:60ch}
-  h2{font-size:14px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
-    margin:40px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
-  .row{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap;margin:0 0 12px}
-  .box{background:var(--card);border:1px solid var(--line);border-radius:10px;
-    padding:13px 15px;flex:1 1 180px;min-width:0}
-  .box h3{margin:0 0 3px;font-size:15px}
-  .box p{margin:0;font-size:13px;color:var(--muted)}
-  .box code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);
-    word-break:break-all}
-  .arrow{align-self:center;color:var(--muted);font-size:20px;flex:0 0 auto}
-  .down{color:var(--muted);text-align:center;margin:2px 0 10px;font-size:20px}
-  .fan{border-left:2px solid var(--line);padding-left:16px;margin:0 0 12px}
-  .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;
-    text-transform:uppercase;padding:2px 7px;border-radius:999px;margin:0 0 6px}
-  .t-q{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
-  .t-c{background:color-mix(in srgb,var(--cut) 16%,transparent);color:var(--cut)}
-  .t-n{background:color-mix(in srgb,var(--muted) 18%,transparent);color:var(--muted)}
-  .cut{background:color-mix(in srgb,var(--cut) 9%,transparent);
-    border:1px solid color-mix(in srgb,var(--cut) 38%,transparent);
-    border-radius:12px;padding:18px 20px;margin:34px 0 0}
-  .cut h2{border:0;margin:0 0 8px;color:var(--cut)}
-  .cut ol{margin:12px 0 0;padding-left:20px}
-  .cut li{margin:0 0 9px;font-size:14.5px}
-  .cut .q{font-size:17px;margin:0 0 4px;font-weight:500}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--muted);padding:9px 10px 9px 0;border-bottom:1px solid var(--line);white-space:nowrap}
-  td{padding:10px 10px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
-  td code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
-  .human{color:var(--warn);font-weight:600}
-  footer{margin-top:40px;color:var(--muted);font-size:13px}
-  @media (max-width:640px){ .arrow{display:none} h1{font-size:25px} }
-</style>
-</head>
-<body>
-<div class="wrap">
+  /* Layout: a single signal path running down the page — stage markers on a left rail,
+     components in the main column, the Cut interrupting the path where it belongs. */
+  :root {
+    --bg: #faf9f7;
+    --surface: #ffffff;
+    --ink: #1a1a19;
+    --muted: #6f6b66;
+    --line: #e4e1dc;
+    --cut: #a8231b;
+    --pass: #2d6a4c;
+    --wait: #8a6314;
 
-  <p class="eyebrow">MESA Case 03 · Aangan Studio</p>
-  <h1>Call agent — component map</h1>
-  <p class="lede">Every phone enquiry answered, qualified against Nikhil&rsquo;s rubric, and
-  booked during the call. The agent never quotes a price.</p>
+    --display: "Newsreader", Georgia, "Times New Roman", serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #171614;
+      --surface: #201e1c;
+      --ink: #f1efea;
+      --muted: #a09a92;
+      --line: #35312c;
+      --cut: #f08279;
+      --pass: #6fc79b;
+      --wait: #e0b254;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171614;
+    --surface: #201e1c;
+    --ink: #f1efea;
+    --muted: #a09a92;
+    --line: #35312c;
+    --cut: #f08279;
+    --pass: #6fc79b;
+    --wait: #e0b254;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 880px; margin: 0 auto; padding-block: 56px 88px; padding-left: 20px; padding-right: 20px; }
+
+  .eyebrow {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 600; font-size: clamp(34px, 6vw, 52px);
+    line-height: 1.04; letter-spacing: -.015em; margin: 0 0 18px; text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--display); font-size: clamp(18px, 2.4vw, 21px); line-height: 1.5;
+    color: var(--muted); margin: 0 0 10px; max-width: 34em;
+  }
+  .standfirst em { font-style: italic; color: var(--ink); }
+
+  h2 {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
+    margin: 64px 0 20px; padding-bottom: 9px; border-bottom: 1px solid var(--line);
+  }
+  h3 { font-family: var(--body); font-size: 16px; font-weight: 600; margin: 0 0 3px; }
+  p { margin: 0 0 14px; }
+  code, .mono { font-family: var(--mono); font-size: .86em; }
+
+  /* ---- the signal path ---- */
+  .path { display: grid; grid-template-columns: 92px 1fr; gap: 0 20px; }
+  .stage {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); padding-top: 16px; border-right: 1px solid var(--line);
+    padding-right: 16px; text-align: right;
+  }
+  .stage span { display: block; }
+  .leg { padding: 14px 0 22px; min-width: 0; }
+  .leg:last-child { padding-bottom: 0; }
+
+  .box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 9px;
+    padding: 14px 16px; margin-bottom: 9px;
+  }
+  .box:last-child { margin-bottom: 0; }
+  .box p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .box .file {
+    display: inline-block; margin-top: 8px; font-family: var(--mono); font-size: 12px;
+    color: var(--muted); background: var(--bg); border: 1px solid var(--line);
+    border-radius: 5px; padding: 2px 7px; word-break: break-all;
+  }
+  .box.cut-edge { border-color: color-mix(in srgb, var(--cut) 45%, var(--line)); }
+
+  .tag {
+    display: inline-block; font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px;
+    border-radius: 999px; margin-bottom: 8px;
+  }
+  .t-pass { background: color-mix(in srgb, var(--pass) 15%, transparent); color: var(--pass); }
+  .t-cut  { background: color-mix(in srgb, var(--cut) 14%, transparent); color: var(--cut); }
+  .t-wait { background: color-mix(in srgb, var(--wait) 16%, transparent); color: var(--wait); }
+  .t-off  { background: color-mix(in srgb, var(--muted) 15%, transparent); color: var(--muted); }
+
+  /* ---- the Cut ---- */
+  .cut-panel {
+    border: 1px solid color-mix(in srgb, var(--cut) 42%, var(--line));
+    background: color-mix(in srgb, var(--cut) 6%, var(--surface));
+    border-radius: 11px; padding: 24px 26px; margin-top: 18px;
+  }
+  .cut-panel .label {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--cut); margin: 0 0 12px;
+  }
+  .said {
+    font-family: var(--display); font-size: clamp(19px, 2.6vw, 24px); line-height: 1.42;
+    margin: 0 0 14px; text-wrap: balance;
+  }
+  .layers { list-style: none; counter-reset: layer; margin: 20px 0 0; padding: 0; }
+  .layers li {
+    counter-increment: layer; position: relative; padding-left: 38px; margin-bottom: 15px;
+    font-size: 15px; line-height: 1.55;
+  }
+  .layers li:last-child { margin-bottom: 0; }
+  .layers li::before {
+    content: counter(layer); position: absolute; left: 0; top: 1px;
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    width: 23px; height: 23px; border-radius: 50%; display: grid; place-items: center;
+    border: 1px solid color-mix(in srgb, var(--cut) 42%, var(--line)); color: var(--cut);
+  }
+  .layers strong { font-weight: 600; }
+
+  /* ---- tables ---- */
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; min-width: 520px; }
+  th {
+    text-align: left; font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    padding: 0 14px 9px 0; border-bottom: 1px solid var(--line); white-space: nowrap;
+  }
+  td { padding: 11px 14px 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:last-child, th:last-child { padding-right: 0; }
+  td.who { color: var(--wait); font-weight: 600; white-space: nowrap; }
+  td.sys { color: var(--muted); white-space: nowrap; }
+  td code { color: var(--muted); }
+
+  /* ---- evidence figures ---- */
+  .figures {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; margin: 0 0 22px;
+  }
+  .fig { background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 15px 16px; }
+  .fig .n {
+    font-family: var(--display); font-size: 31px; font-weight: 600; line-height: 1.1;
+    font-variant-numeric: tabular-nums; margin: 0 0 2px;
+  }
+  .fig .k {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin: 0;
+  }
+  .fig .sub { font-size: 13px; color: var(--muted); margin: 5px 0 0; line-height: 1.45; }
+  .fig.accent .n { color: var(--cut); }
+
+  /* ---- field notes ---- */
+  .note { border-left: 2px solid var(--line); padding: 2px 0 2px 18px; margin: 0 0 20px; }
+  .note:last-child { margin-bottom: 0; }
+  .note h3 { margin-bottom: 5px; }
+  .note p { color: var(--muted); font-size: 14.5px; margin: 0; }
+  .note .was {
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px 11px; margin: 9px 0 0; display: block; overflow-x: auto; white-space: pre;
+  }
+
+  footer {
+    margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line);
+    font-size: 13.5px; color: var(--muted);
+  }
+  footer a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  a:focus-visible, :focus-visible { outline: 2px solid var(--cut); outline-offset: 2px; }
+
+  @media (max-width: 560px) {
+    .path { grid-template-columns: 1fr; gap: 0; }
+    .stage {
+      border-right: 0; border-bottom: 1px solid var(--line); text-align: left;
+      padding: 0 0 7px; margin-top: 26px;
+    }
+    .stage span { display: inline; }
+    .leg { padding: 12px 0 4px; }
+  }
+</style>
+
+<div class="page">
+
+  <p class="eyebrow">MESA Case 03 · Aangan Studio, Pune</p>
+  <h1>The call agent that won't quote</h1>
+  <p class="standfirst">
+    Every phone enquiry answered, qualified against Nikhil's own rubric, and booked during the
+    call. <em>It never gives a price.</em> That one refusal is designed in three times over,
+    because a prompt is a request and not a guarantee.
+  </p>
 
   <h2>The path a call takes</h2>
 
-  <div class="row">
-    <div class="box"><h3>Caller</h3><p>Phones the studio, any hour</p></div>
-    <div class="arrow">→</div>
-    <div class="box"><h3>Vaani AI</h3><p>Answers, asks the seven questions, offers two slots</p><code>vaani/agent-setup.md</code></div>
-    <div class="arrow">→</div>
-    <div class="box"><h3>Webhook</h3><p>call_started, then call_postprocessing. Token auth, idempotent</p><code>/api/vaani/webhook</code></div>
-  </div>
-  <div class="down">↓</div>
+  <div class="path">
 
-  <div class="row">
-    <div class="box"><h3>Supabase</h3><p>Row written before anything can fail. RLS on, server-only</p><code>calls · designers · daily_metrics</code></div>
-    <div class="arrow">→</div>
-    <div class="box"><h3>Gemini Flash</h3><p>JSON mode, temperature 0, against the rubric verbatim</p><code>lib/classify.ts</code></div>
-    <div class="arrow">→</div>
-    <div class="box" style="border-color:var(--cut)"><h3>Price filter</h3><p>Strips any studio-voiced figure. Keeps what the caller volunteered</p><code>lib/price-filter.ts</code></div>
-  </div>
-  <div class="down">↓</div>
-
-  <div class="fan">
-    <div class="row">
-      <div class="box"><span class="tag t-q">qualified</span>
-        <h3>Designer email + HubSpot deal</h3>
-        <p>Handoff note first, then detail, then one-tap Claim / Reschedule. HMAC-signed, GET confirms and POST acts, so inbox scanners cannot fire them. Each output is independent — HubSpot failing never stops the email.</p>
+    <div class="stage"><span>Inbound</span></div>
+    <div class="leg">
+      <div class="box">
+        <h3>Caller</h3>
+        <p>Phones the studio. A third of them call when the front desk is shut.</p>
+      </div>
+      <div class="box">
+        <h3>Vaani voice agent</h3>
+        <p>Answers, works through seven questions, deflects pricing, offers two consultation
+          slots. Runs on LiveKit, so each call is a <span class="mono">room</span>.</p>
+        <span class="file">vaani/agent-setup.md</span>
       </div>
     </div>
-    <div class="row">
-      <div class="box"><span class="tag t-c">complaint</span>
-        <h3>Front desk &mdash; <span class="human">a human calls back</span></h3>
-        <p>The agent takes a message and does not attempt to resolve anything.</p>
+
+    <div class="stage"><span>Intake</span></div>
+    <div class="leg">
+      <div class="box">
+        <h3>Webhook</h3>
+        <p>Two events per call. Authenticated by a shared secret in the URL, because Vaani's
+          webhooks are unsigned. Idempotent: a retry returns
+          <span class="mono">already_processed</span> rather than emailing a designer twice.</p>
+        <span class="file">app/api/vaani/webhook/route.ts</span>
       </div>
-      <div class="box"><span class="tag t-n">not a fit / unclear</span>
+      <div class="box">
+        <h3>Payload normaliser</h3>
+        <p>Vaani sends no event field and no call id. The identifier is
+          <span class="mono">room_name</span>; the event is inferred from shape — a payload
+          carrying a transcript is the finished call.</p>
+        <span class="file">lib/vaani.ts</span>
+      </div>
+      <div class="box">
+        <h3>Supabase</h3>
+        <p>The row is written before anything can fail. Row-level security on, service role
+          server-side only, so the browser never touches the database.</p>
+        <span class="file">supabase/migrations/0001_init.sql</span>
+      </div>
+    </div>
+
+    <div class="stage"><span>Judgement</span></div>
+    <div class="leg">
+      <div class="box">
+        <h3>Gemini Flash</h3>
+        <p>JSON mode, temperature 0, reading <span class="mono">qualified.md</span> and
+          <span class="mono">services.md</span> verbatim. Returns a verdict, the deciding
+          criterion, lead fields, and an eight-line note for a phone screen.</p>
+        <span class="file">lib/classify.ts</span>
+      </div>
+      <div class="box cut-edge">
+        <span class="tag t-cut">the cut</span>
+        <h3>Price filter</h3>
+        <p>Strips any figure spoken in the studio's voice. Keeps a budget the caller
+          volunteered — that is the caller's statement, and the designer needs it.</p>
+        <span class="file">lib/price-filter.ts</span>
+      </div>
+    </div>
+
+    <div class="stage"><span>Handoff</span></div>
+    <div class="leg">
+      <div class="box">
+        <span class="tag t-pass">qualified</span>
+        <h3>Designer email, then a HubSpot deal</h3>
+        <p>The note first, the detail second, then one-tap Claim and Reschedule. Those links are
+          HMAC-signed and confirm on GET, acting only on POST, so an inbox scanner cannot claim a
+          lead by previewing the message. Each output is independent — HubSpot failing never
+          stops the email.</p>
+        <span class="file">lib/email.ts · lib/links.ts · lib/hubspot.ts</span>
+      </div>
+      <div class="box">
+        <span class="tag t-wait">complaint</span>
+        <h3>Front desk — a person calls back</h3>
+        <p>An upset client is not a classification problem. The agent takes a message and
+          attempts nothing else.</p>
+      </div>
+      <div class="box">
+        <span class="tag t-off">not a fit · unclear</span>
         <h3>Logged only</h3>
-        <p>No email, no deal. It still counts on the dashboard.</p>
+        <p>No email, no deal. It still counts on the dashboard, because the enquiries that go
+          nowhere are half the reason this exists.</p>
       </div>
-    </div>
-    <div class="row">
-      <div class="box" style="border-color:var(--warn)"><span class="tag t-n">classifier failed</span>
+      <div class="box">
+        <span class="tag t-wait">classifier down</span>
         <h3>Raw transcript to the front desk</h3>
-        <p>Never lose a lead: if the model is down or out of quota, a person still gets the call.</p>
+        <p>Never lose a lead. If the model is out of quota or the database is unreachable, the
+          call still reaches a human instead of returning an error for Vaani to retry.</p>
       </div>
     </div>
-  </div>
-  <div class="down">↓</div>
 
-  <div class="row">
-    <div class="box"><h3>Dashboard</h3>
-      <p>Calls, after-hours share, qualified, booked, show-ups, won value, running cost — and how many prices the filter blocked. Behind basic auth.</p>
-      <code>app/page.tsx</code></div>
+    <div class="stage"><span>Result</span></div>
+    <div class="leg">
+      <div class="box">
+        <h3>Dashboard</h3>
+        <p>Calls, the after-hours share, qualified, booked, show-ups, won value, running cost —
+          and a count of the prices the filter blocked. Behind basic auth, because it lists
+          callers.</p>
+        <span class="file">app/page.tsx</span>
+      </div>
+    </div>
+
   </div>
 
-  <div class="cut">
-    <h2>The Cut</h2>
-    <p class="q">&ldquo;Your designer will walk you through pricing on the consultation,
-    because it depends on your site and your choices.&rdquo;</p>
-    <p style="margin:0;color:var(--muted);font-size:14px">Nikhil asked for per-sq-ft quoting.
-    The agent does not do it. A price in the studio&rsquo;s voice is heard as a commitment and
-    cannot be withdrawn &mdash; so it is blocked three times, because a prompt is a request,
-    not a guarantee.</p>
-    <ol>
-      <li><strong>The rate card is never in the room.</strong> Only <code>qualified.md</code> and
-      <code>services.md</code> load. <code>lib/knowledge.ts</code> refuses to start if
-      <code>pricing.md</code> ever appears.</li>
+  <h2>The Cut</h2>
+
+  <div class="cut-panel">
+    <p class="label">Quoting per-sq-ft pricing — the one thing Nikhil asked for and did not get</p>
+    <p class="said">"Your designer will walk you through pricing on the consultation, because it
+      depends on your site and your choices."</p>
+    <p style="margin:0;color:var(--muted);font-size:15px;">
+      A price said in the studio's voice is heard as a commitment, and it cannot be taken back.
+      A wrong classification costs a callback; a wrong price costs the relationship. So pricing
+      is not delegated at all — and it is blocked at three separate layers, on the assumption
+      that any one of them can fail.
+    </p>
+    <ol class="layers">
+      <li><strong>The rate card is never in the room.</strong> Only the rubric and the services
+        file are ever loaded. The loader refuses to start if <span class="mono">pricing.md</span>
+        appears, and that check runs ahead of the cache so a rate card cannot ride along on a
+        warm serverless instance.</li>
       <li><strong>The output is filtered in code.</strong> Rupee amounts, lakh and crore figures,
-      per-sq-ft rates and estimate language are stripped from every free-text field. A budget the
-      <em>caller</em> volunteered survives &mdash; it is their statement, and the designer needs it.</li>
-      <li><strong>Asking can never disqualify.</strong> A <code>not_fit</code> that cites pricing,
-      with no volunteered budget, is overruled in code and the override is recorded on the row.</li>
+        per-sq-ft rates and estimate language are stripped from every free-text field before a
+        human sees them. Measurements survive: 1,400 sq ft and six weeks are not money.</li>
+      <li><strong>Asking can never disqualify.</strong> The rubric says so explicitly, so a
+        <span class="mono">not_fit</span> that cites pricing with no volunteered budget is
+        overruled in code and the override recorded on the row.</li>
     </ol>
   </div>
 
-  <h2>Where a human stays in the loop</h2>
-  <table>
-    <thead><tr><th>Decision</th><th>Owner</th><th>Why</th></tr></thead>
-    <tbody>
-      <tr><td>Price</td><td class="human">Nikhil</td><td>Heard as a commitment; cannot be withdrawn</td></tr>
-      <tr><td>Site visits and dates</td><td class="human">Designer</td><td>Depends on a calendar the agent cannot see</td></tr>
-      <tr><td>Complaints</td><td class="human">Front desk</td><td>An upset client needs a person, immediately</td></tr>
-      <tr><td>Answer, qualify, book</td><td>Agent</td><td>High volume, rule-written, cheap to get wrong</td></tr>
-      <tr><td>Relationship after handoff</td><td class="human">Designer</td><td>Starts at the Claim link</td></tr>
-    </tbody>
-  </table>
+  <h2>Where a human stays</h2>
 
-  <h2>Evidence it works</h2>
-  <table>
-    <thead><tr><th>Check</th><th>How</th></tr></thead>
-    <tbody>
-      <tr><td>Classification</td><td>All 20 September phone enquiries replayed through <code>evals/run.ts</code>, scored against <code>evals/expected.json</code></td></tr>
-      <tr><td>The Cut</td><td>20 unit tests: 12 price shapes stripped, 5 caller-volunteered figures kept, measurements untouched</td></tr>
-      <tr><td>Idempotency</td><td>A repeated <code>call_postprocessing</code> returns <code>already_processed</code> without re-emailing</td></tr>
-      <tr><td>Resilience</td><td>Classifier failure emails the raw transcript instead of dropping the lead</td></tr>
-    </tbody>
-  </table>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Decision</th><th>Owner</th><th>Why it sits there</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Price</td><td class="who">Nikhil</td><td>Heard as a commitment; cannot be withdrawn</td></tr>
+        <tr><td>Site visits and dates</td><td class="who">Designer</td><td>Depends on a calendar the agent cannot see</td></tr>
+        <tr><td>Complaints</td><td class="who">Front desk</td><td>An upset client needs a person, immediately</td></tr>
+        <tr><td>The relationship after handoff</td><td class="who">Designer</td><td>Begins at the Claim link</td></tr>
+        <tr><td>Answer, qualify, book</td><td class="sys">Agent</td><td>High volume, rule-written, cheap to get wrong</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-  <footer>Scope: incoming phone calls. WhatsApp and the web form reuse everything except the trigger.</footer>
+  <h2>Evidence</h2>
+
+  <div class="figures">
+    <div class="fig">
+      <p class="n">20/20</p><p class="k">Eval</p>
+      <p class="sub">Every September phone enquiry classified correctly</p>
+    </div>
+    <div class="fig accent">
+      <p class="n">2</p><p class="k">Prices blocked</p>
+      <p class="sub">Figures stripped before any human read them</p>
+    </div>
+    <div class="fig">
+      <p class="n">45</p><p class="k">Tests</p>
+      <p class="sub">Price shapes, event shapes, IST boundaries, duration units</p>
+    </div>
+    <div class="fig">
+      <p class="n">3</p><p class="k">After hours</p>
+      <p class="sub">Of 20 calls — including a 10:47pm missed call with no voicemail</p>
+    </div>
+  </div>
+
+  <p style="color:var(--muted);font-size:15px;margin:0;">
+    The twenty verdicts turn on seven different criteria, which is the part worth checking: service
+    area for Nashik, timeline for the caller who wanted it done before Diwali, a volunteered budget
+    far below scope, an existing client's complaint, a missed call with nothing to assess. Two
+    callers pressed for a price. Both qualified, and the filter stripped a figure from each — which
+    is exactly where a careless build gets it backwards.
+  </p>
+
+  <h2>What the real calls corrected</h2>
+
+  <div class="note">
+    <h3>Vaani sends no call id</h3>
+    <p>The first live call reached the webhook twice and was dropped both times. The documented
+      <span class="mono">call_id</span> is absent from what it actually posts; the stable
+      identifier is <span class="mono">room_name</span>, because Vaani runs on LiveKit. There is
+      no event field either, so the event is now inferred from the payload's shape.</p>
+    <span class="was">[webhook] no call id in payload; keys were: room_name,phone_number,call_type,agent_name</span>
+  </div>
+
+  <div class="note">
+    <h3>call_duration is seconds, not milliseconds</h3>
+    <p>A 208-second call was stored as zero. Dividing by a thousand rounded it away and took the
+      cost column with it. Start and end timestamps are unambiguous, so they decide now; the
+      reported duration is a fallback whose unit is inferred from magnitude.</p>
+  </div>
+
+  <div class="note">
+    <h3>A probe is not a failure</h3>
+    <p>Answering a connectivity test with 4xx is how a provider decides an endpoint is broken and
+      disables the hook. Anything unrecognised now gets a 200 with the diagnosis in the body. A
+      bad token is still rejected outright.</p>
+  </div>
+
+  <h2>Stack</h2>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Layer</th><th>Choice</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Voice</td><td class="sys">Vaani AI</td><td>LiveKit underneath; inbound numbers are paid, so demos use the test call</td></tr>
+        <tr><td>App</td><td class="sys">Next.js 16 on Vercel</td><td>App Router, route handlers, server components</td></tr>
+        <tr><td>Model</td><td class="sys">Gemini Flash</td><td>JSON schema mode, temperature 0, roughly 20 requests a day free</td></tr>
+        <tr><td>Data</td><td class="sys">Supabase Postgres</td><td>RLS on with no policies; only the service role reads</td></tr>
+        <tr><td>Email</td><td class="sys">Resend</td><td>Sandbox sender delivers to the account address only</td></tr>
+        <tr><td>CRM</td><td class="sys">HubSpot</td><td>Optional. Skipped cleanly when no token is set</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    Scope is incoming phone calls. WhatsApp and the web form reuse every component except the
+    trigger. Source: <a href="https://github.com/aaditaa/aangan-voice-agent">github.com/aaditaa/aangan-voice-agent</a>
+  </footer>
+
 </div>
-</body>
-</html>
