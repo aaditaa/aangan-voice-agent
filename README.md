@@ -1,5 +1,8 @@
 # Aangan Studio — AI call agent
 
+**Live:** https://aangan-voice-agent-psi.vercel.app (dashboard is password-protected, user `aangan`)
+**Repo:** https://github.com/aaditaa/aangan-voice-agent
+
 MESA Case 03. Aangan Studio is an interior design studio in Pune. About half its phone
 enquiries get no reply within 48 hours, and a third arrive when the front desk is closed.
 This answers every call, qualifies it against Nikhil's own rubric, books a consultation
@@ -233,10 +236,20 @@ Built and checked here:
 - The eval harness scored end to end against seeded results, including a deliberately
   injected price leak, which it caught.
 
-Not yet run, because it needs live credentials:
+Verified against the live deployment:
 
-- A real Gemini classification — so **no accuracy number is claimed yet**. Add
-  `GEMINI_API_KEY` and run `npm run eval` to get the table.
+- Supabase project `aangan-voice-agent` (ap-south-1) created, both migrations applied,
+  RLS on, one designer seeded.
+- Deployed to Vercel. Dashboard returns 401 without credentials; both API routes return
+  401 on a bad token.
+- Two real classifications through the deployed `/api/eval` on `gemini-3.8-flash`:
+  T02 → `qualified` with `asked_pricing` true, T10 → `not_fit` on "4 volunteered budget"
+  with the caller's figure held in its own field and no price in the handoff note.
+
+Not yet run, because it needs the remaining credentials:
+
+- The full eval across all 20 transcripts (`npm run eval`) — the free tier allows about
+  20 requests a day.
 - Delivery through Resend, a HubSpot deal, and a Vaani call.
 
 ---
