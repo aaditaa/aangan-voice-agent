@@ -51,15 +51,29 @@ test('call_ringing is ignored rather than treated as the end of the call', () =>
 });
 
 // --- duration: milliseconds, and sometimes absent -------------------------
-test('duration comes from call_duration in milliseconds', () => {
-  assert.equal(durationSeconds(252000, null, null), 252);
-});
-
-test('duration falls back to end minus start when Vaani omits it', () => {
+test('timestamps win over the reported duration, whatever its unit', () => {
   const start = new Date('2026-09-02T10:23:00+05:30');
   const end = new Date('2026-09-02T10:27:12+05:30');
   assert.equal(durationSeconds(undefined, start, end), 252);
   assert.equal(durationSeconds(0, start, end), 252);
+  assert.equal(durationSeconds(252, start, end), 252);      // seconds
+  assert.equal(durationSeconds(252000, start, end), 252);   // milliseconds
+  assert.equal(durationSeconds('nonsense', start, end), 252);
+});
+
+test('a real 208-second call is not rounded away to zero', () => {
+  // Regression: call_duration arrived as 208 (seconds). Dividing by 1000 gave 0,
+  // which zeroed the cost column on the dashboard.
+  const start = new Date('2026-10-10T16:33:31.599Z');
+  const end = new Date('2026-10-10T16:36:59.835Z');
+  assert.equal(durationSeconds(208, start, end), 208);
+  assert.equal(durationSeconds(208, null, null), 208);
+});
+
+test('without timestamps, the unit is inferred from magnitude', () => {
+  assert.equal(durationSeconds(252, null, null), 252);       // plainly seconds
+  assert.equal(durationSeconds(252000, null, null), 252);    // plainly milliseconds
+  assert.equal(durationSeconds(45, null, null), 45);         // a short call
 });
 
 test('duration is zero rather than negative or NaN when nothing is known', () => {

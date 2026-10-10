@@ -22,16 +22,26 @@ export function isAfterHours(d: Date): boolean {
   return hour < OFFICE_OPEN_HOUR || hour >= OFFICE_CLOSE_HOUR;
 }
 
-/** Vaani sends call_duration in milliseconds, and sometimes not at all. */
+/**
+ * How long the call lasted, in seconds.
+ *
+ * `call_duration` has no reliable unit: the class guide says milliseconds, the
+ * webhook sends seconds (a 208-second call arrived as 208, which divided by 1000
+ * rounded to zero and took the cost column with it). So the timestamps win when
+ * we have them — a start and an end are unambiguous — and the reported duration
+ * is only a fallback, with its unit inferred from magnitude.
+ */
+const MAX_PLAUSIBLE_CALL_SECONDS = 4 * 60 * 60; // past this, the number must be ms
+
 export function durationSeconds(
-  callDurationMs: unknown, startedAt: Date | null, endedAt: Date | null,
+  reported: unknown, startedAt: Date | null, endedAt: Date | null,
 ): number {
-  const ms = typeof callDurationMs === 'number' ? callDurationMs
-    : typeof callDurationMs === 'string' ? Number(callDurationMs) : NaN;
-  if (Number.isFinite(ms) && ms > 0) return Math.round(ms / 1000);
   if (startedAt && endedAt) {
     const s = Math.round((endedAt.getTime() - startedAt.getTime()) / 1000);
     if (s > 0) return s;
   }
-  return 0;
+  const n = typeof reported === 'number' ? reported
+    : typeof reported === 'string' ? Number(reported) : NaN;
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  return n > MAX_PLAUSIBLE_CALL_SECONDS ? Math.round(n / 1000) : Math.round(n);
 }
