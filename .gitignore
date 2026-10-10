@@ -9,3 +9,5 @@ next-env.d.ts
 evals/.cache/
 evals/results/
 .DS_Store
+.vercel
+.env*
