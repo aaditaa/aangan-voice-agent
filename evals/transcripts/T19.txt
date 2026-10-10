@@ -1,0 +1,6 @@
+AGENT: Good afternoon, Aangan Studio.
+USER: Hi - I'm planning to open a restaurant in Koregaon Park. I've seen your work and I love it. Would you be able to design the interiors?
+AGENT: We appreciate you reaching out. Restaurant and hospitality interiors are outside our current scope - we focus on residential and office spaces. For a restaurant you'd need a studio that specialises in commercial hospitality, which has very different material and compliance requirements.
+USER: Do you know anyone you could refer?
+AGENT: I don't have a specific referral I could make confidently, but searching for hospitality interior designers in Pune would give you more relevant options.
+USER: Alright, thanks.

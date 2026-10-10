@@ -1,0 +1,8 @@
+AGENT: Good morning, Aangan Studio.
+USER: Hi - I have a question. I'm in a rented apartment. Can you still take up a project?
+AGENT: It depends on the scope. What are you looking to do?
+USER: It's a 2BHK in Baner. I've been here a year, I have a 3-year lease, and the place is quite bare. I want to properly design the living room, bedroom, and kitchen - no structural changes, just design and fittings.
+AGENT: That's fine - we've done rented apartments before. For the kitchen we'd do a modular unit that can come out cleanly. The rest is largely flooring, lighting, and furniture - all reversible. Have you checked with your landlord?
+USER: Yes - they're fine with it as long as we don't break walls.
+AGENT: Perfect. No wall-breaking from us. Shall we set up a consultation?
+USER: Yes please.

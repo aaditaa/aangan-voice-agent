@@ -1,0 +1,12 @@
+AGENT: Good morning, Aangan Studio.
+USER: Hi, I'm Priya. I got your number from a friend - Shruti Joshi. She had her flat done by you in Aundh.
+AGENT: Of course - thank you for calling. What are you looking to do?
+USER: We have a 3BHK in Kothrud - Dahanukar Colony. We bought it two years ago and it still looks like the builder flat. We want to redo the whole thing - kitchen, living room, both bedrooms.
+AGENT: That sounds like a complete redesign. How big is the apartment?
+USER: About 1,400 sq ft carpet.
+AGENT: And your timeline?
+USER: We'd like to be done by March. We're in no rush.
+AGENT: Perfect. Are you the owner?
+USER: Yes - myself and my husband. He knows we're calling and is happy to go ahead.
+AGENT: Lovely. Can I take your number and schedule a consultation?
+USER: Sure. (gives number)

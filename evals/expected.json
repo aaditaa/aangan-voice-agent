@@ -1,0 +1,25 @@
+{
+  "_note": "Expected answers for the 20 September phone enquiries, derived from knowledge/qualified.md and knowledge/services.md. 'why' names the deciding criterion. Items marked ambiguous are genuine judgement calls — see README.",
+  "cases": [
+    { "id": "T01", "time": "10:23am", "expected": "qualified", "why": "all five pass — 3BHK Kothrud, 1400 sq ft, full redesign, March, owner" },
+    { "id": "T02", "time": "2:41pm",  "expected": "qualified", "asked_pricing": true, "why": "asked price twice; rubric says asking never disqualifies" },
+    { "id": "T03", "time": "4:15pm",  "expected": "not_fit",   "why": "2 service area — Nashik" },
+    { "id": "T04", "time": "11:07am", "expected": "not_fit",   "why": "1 real project — ideas and advice only" },
+    { "id": "T05", "time": "10:52am", "expected": "qualified", "why": "all five pass — 4BHK Koregaon Park, 2400 sq ft, four months" },
+    { "id": "T06", "time": "3:28pm",  "expected": "qualified", "why": "office 800 sq ft Baner, bare shell, December, founder decides" },
+    { "id": "T07", "time": "9:44am",  "expected": "not_fit",   "why": "3 timeline — wants it before Diwali, three weeks away", "note": "caller floats a November start; agent correctly does not commit" },
+    { "id": "T08", "time": "10:47pm", "expected": "unclear",   "why": "missed call at 10:47pm, no voicemail, no conversation to assess" },
+    { "id": "T09", "time": "11:32am", "expected": "complaint", "why": "existing client, designer unresponsive five days" },
+    { "id": "T10", "time": "2:04pm",  "expected": "not_fit",   "why": "4 volunteered budget — 1 to 1.5 lakh for a kitchen plus a bedroom" },
+    { "id": "T11", "time": "10:18am", "expected": "qualified", "why": "rented 2BHK Baner, no structural changes, landlord agrees" },
+    { "id": "T12", "time": "10:05am", "expected": "qualified", "why": "villa 5500 sq ft Kalyani Nagar, new construction, March" },
+    { "id": "T13", "time": "12:19pm", "expected": "qualified", "asked_pricing": true, "why": "pressed for a range twice, then booked" },
+    { "id": "T14", "time": "11:41am", "expected": "qualified", "why": "5 unclear but represented — son calling, parents will attend", "expect_note": "decision-maker" },
+    { "id": "T15", "time": "3:12pm",  "expected": "qualified", "why": "possession in six weeks, design starts now — inside the lead time" },
+    { "id": "T16", "time": "10:38am", "expected": "qualified", "ambiguous": true, "why": "a dropped prospect, not an existing client — real 3BHK Viman Nagar project, book it and flag the service failure" },
+    { "id": "T17", "time": "2:14pm",  "expected": "qualified", "why": "first call dropped, called back — 3BHK Pimple Saudagar, March" },
+    { "id": "T18", "time": "11:55am", "expected": "not_fit",   "why": "scope below minimum — 180 sq ft coworking pod" },
+    { "id": "T19", "time": "4:02pm",  "expected": "not_fit",   "why": "1/scope — restaurant, hospitality out of scope" },
+    { "id": "T20", "time": "9:15am",  "expected": "qualified", "why": "2BHK Magarpatta, January start, both owners attending" }
+  ]
+}

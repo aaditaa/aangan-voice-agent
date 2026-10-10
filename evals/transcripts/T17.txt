@@ -1,0 +1,10 @@
+AGENT: Good afternoon, Aangan Studio.
+USER: Hi, I wanted to inquire about - (line drops)
+Second call - 4 min 30 sec
+AGENT: Good afternoon, Aangan Studio.
+USER: Hi - I called just now and got cut off. I'm Ritu Kapoor from Pimple Saudagar. 3BHK, about 1,050 sq ft. We've been here two years but never properly did the interiors. We want to start now.
+AGENT: Thanks for calling back. Pimple Saudagar is in our service area. What are you looking to do?
+USER: Kitchen, wardrobes, living room. We moved in with builder furniture and it's very basic.
+AGENT: Standard full-home scope. Timeline?
+USER: Ideally done by March. Plenty of time.
+AGENT: Perfect. Let me book a consultation.

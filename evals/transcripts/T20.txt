@@ -1,0 +1,8 @@
+AGENT: Good morning, Aangan Studio.
+USER: Good morning. I'm Pooja. I have a 2BHK in Magarpatta - Cybercity area. We've been wanting to properly design the interiors for a while. Kitchen, both bedrooms, living room. About 900 sq ft.
+AGENT: Good scope for us. How soon are you looking to start?
+USER: We're flexible - a January start for execution would be ideal.
+AGENT: That works well. Are you the owner?
+USER: Yes - my husband and I. We both want to be at the consultation.
+AGENT: Excellent. Can I book that now?
+USER: Please.

@@ -1,0 +1,6 @@
+AGENT: Good morning, Aangan Studio.
+USER: Hi - I run a small coworking space. I have a 180 sq ft pod I want to make look really nice. Good lighting, a nice desk, some storage. Can you help?
+AGENT: Our commercial projects are typically 500 sq ft or more. A 180 sq ft pod is below our minimum scope.
+USER: Not even for a smaller fee?
+AGENT: It's not about the fee - it's that our design and execution team is set up for a certain scale. A 180 sq ft space isn't one we could do well at the quality we'd want to promise. I'd suggest a local designer who specialises in smaller commercial spaces.
+USER: Fair enough. Thanks.

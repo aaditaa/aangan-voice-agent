@@ -1,0 +1,9 @@
+AGENT: Good morning, Aangan Studio.
+USER: I'm calling about a villa project in Kalyani Nagar. My name is Anand Sharma. The property is about 5,500 sq ft - ground plus two floors. Full end-to-end design.
+AGENT: That's a significant project. Is this a new property or an existing home?
+USER: New construction. Possession was last month. Completely empty.
+AGENT: And your timeline?
+USER: March next year to move in. No rush.
+AGENT: Good time to start. Would you like our principal designer to come to site for the first consultation?
+USER: Yes - this week or next if possible.
+AGENT: Let me check the calendar and revert by end of day.

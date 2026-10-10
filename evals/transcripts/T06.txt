@@ -1,0 +1,9 @@
+AGENT: Good afternoon, Aangan Studio.
+USER: Hi, I'm calling about a commercial project. We're a startup - just got our first proper office space in Baner. About 800 sq ft. We need workstations for 20 people, a small cabin, a meeting room, and a break area.
+AGENT: We do commercial fitouts up to about 3,000 sq ft. What's the state of the space right now?
+USER: Bare shell - just columns and floor. Nothing else.
+AGENT: Full fitout from scratch. And the timeline?
+USER: We want to be operational by December. Our team is working from home currently.
+AGENT: December is doable. Are you the decision-maker for this?
+USER: Yes, I'm the founder.
+AGENT: Perfect. Let's set up a consultation.

@@ -1,0 +1,9 @@
+AGENT: Good afternoon, Aangan Studio.
+USER: Hi - I'd called on Monday about a project. Someone said they'd get back to me. It's been two days.
+AGENT: I'm very sorry. Can I get your name?
+USER: Girish Nair. I called Monday afternoon. I told someone about my 3BHK in Viman Nagar and gave my number.
+AGENT: I apologise - I don't see a note. Can you give me your details again? I'll book the consultation directly now so it doesn't slip again.
+USER: This is not a good sign if you forget before you even start.
+AGENT: You're absolutely right, and I'm sorry. Let me make this right now.
+Note: Enquiry originally received Monday - no follow-up. Re-logged Friday.
+USER: frustrated. Handle with care.
