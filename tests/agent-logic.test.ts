@@ -133,3 +133,43 @@ test('a not_fit for a real reason is left alone', () => {
   assert.equal(result.classification, 'not_fit');
   assert.deepEqual(overrides, []);
 });
+
+// --- the payloads Vaani actually sends ------------------------------------
+// Taken from production logs: no call_id, no event field. The identifier is
+// room_name (Vaani runs on LiveKit) and the event has to be inferred.
+
+test('a real Vaani call_started payload yields an id and the start event', () => {
+  const n = normalise({
+    room_name: 'call-abc123', phone_number: '+919876543210',
+    call_type: 'inbound', agent_name: 'Interior Design',
+  });
+  assert.equal(n.callId, 'call-abc123');
+  assert.equal(n.callerNumber, '+919876543210');
+  assert.equal(n.event, 'call_started');
+});
+
+test('the shorter ringing-shaped payload still resolves an id', () => {
+  const n = normalise({ room_name: 'call-abc123', phone_number: '+919876543210' });
+  assert.equal(n.callId, 'call-abc123');
+});
+
+test('a payload carrying a transcript is treated as the finished call', () => {
+  const n = normalise({
+    room_name: 'call-abc123', phone_number: '+919876543210',
+    transcript: 'AGENT: Good morning.\nUSER: I have a 3BHK in Baner.',
+  });
+  assert.equal(n.event, 'call_postprocessing');
+  assert.match(n.transcript, /3BHK in Baner/);
+});
+
+test('a summary alone is enough to count as the finished call', () => {
+  const n = normalise({ room_name: 'r1', summary: 'Caller wants a full redesign.' });
+  assert.equal(n.event, 'call_postprocessing');
+});
+
+test('an explicit event name still wins over the inferred one', () => {
+  const n = normalise({
+    event: 'call_started', room_name: 'r1', transcript: 'AGENT: Hello.',
+  });
+  assert.equal(n.event, 'call_started');
+});

@@ -29,6 +29,22 @@ export async function POST(req: Request): Promise<Response> {
   }
 
   const call = normalise(payload);
+
+  // One line per call, so a payload shape we have not seen is obvious in the Vercel
+  // log without another round trip. Long digit runs are masked: these are real
+  // callers' numbers and they do not belong in a log line.
+  console.log(
+    `[webhook] event=${call.event} id=${call.callId ?? 'NONE'} ` +
+      `transcript=${call.transcript ? `${call.transcript.length}ch` : 'none'} ` +
+      `keys=${call.rawKeys.join(',')}`,
+  );
+  if (call.event === 'call_postprocessing' && !call.transcript) {
+    console.warn(
+      '[webhook] post-processing arrived with no transcript — the field name may differ. Body: ' +
+        JSON.stringify(payload).replace(/\d{7,}/g, '[number]').slice(0, 1200),
+    );
+  }
+
   if (!call.callId) {
     console.warn(`[webhook] no call id in payload; keys were: ${call.rawKeys.join(',') || '(none)'}`);
     return ok({
